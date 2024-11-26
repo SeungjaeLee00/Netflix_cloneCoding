@@ -18,7 +18,6 @@ const HomeMain = () => {
     setNewReleasesUrl(urlService.getURL4ReleaseMovies(apiKey));
     setActionMoviesUrl(urlService.getURL4GenreMovies(apiKey, "28"));
 
-    // Load the featured movie
     const loadFeaturedMovie = async () => {
       const movie = await urlService.fetchFeaturedMovie(apiKey);
       setFeaturedMovie(movie);
@@ -26,7 +25,6 @@ const HomeMain = () => {
 
     loadFeaturedMovie();
 
-    // Scroll listener
     const handleScroll = () => {
       const header = document.querySelector(".app-header");
       if (window.scrollY > 50) {
