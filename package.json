@@ -2,7 +2,7 @@
   "name": "ws_task2",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://SeungjaeLee00.github.io/Netflix_cloneCoding",
+  "homepage": "https://github.com/SeungjaeLee00/Netflix_cloneCoding.git",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
