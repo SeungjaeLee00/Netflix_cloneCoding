@@ -1,0 +1,140 @@
+/* 기본 스타일 */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  transition: background-color 0.3s ease, padding 0.3s ease;
+}
+
+/* 스크롤 후 헤더 스타일 */
+.header.scrolled {
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 10px 20px;
+}
+
+/* 로고 스타일 */
+.header .logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.header .logo a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.header .logo a:hover {
+  color: #e50914;
+}
+
+/* 네비게이션 메뉴 */
+.header nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* 네비게이션 항목 스타일 */
+.header nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.header nav a:hover {
+  color: #e50914;
+}
+
+.header nav button {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.header nav button:hover {
+  background-color: #f40612;
+}
+
+/* 반응형 디자인: 햄버거 메뉴 */
+@media (max-width: 768px) {
+  .header nav {
+    display: none; /* 기본적으로 숨기기 */
+    flex-direction: column;
+    position: absolute;
+    top: 70px; /* 헤더 바로 아래로 위치 */
+    right: 0;
+    width: 100%; /* 전체 너비를 차지하게 */
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .header nav.open {
+    display: flex; /* 열렸을 때 표시 */
+  }
+
+  /* 햄버거 메뉴 아이콘 */
+  .header .hamburger {
+    display: block; /* 작은 화면에서만 보이도록 설정 */
+    cursor: pointer;
+    z-index: 1100;
+  }
+
+  .header .hamburger div {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+    transition: 0.3s;
+  }
+
+  /* 햄버거 메뉴가 열릴 때 아이콘 애니메이션 */
+  .header .hamburger.open div:nth-child(1) {
+    transform: rotate(45deg);
+    position: relative;
+    top: 8px;
+  }
+
+  .header .hamburger.open div:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header .hamburger.open div:nth-child(3) {
+    transform: rotate(-45deg);
+    position: relative;
+    top: -8px;
+  }
+}
+
+/* 큰 화면에서 네비게이션 메뉴 레이아웃 */
+@media (min-width: 769px) {
+  .header nav {
+    display: flex; /* 큰 화면에서는 기본적으로 메뉴 보이기 */
+    gap: 20px;
+    position: relative; /* 고정되지 않게 설정 */
+    top: 0; /* 메뉴가 타이틀과 겹치지 않게 하기 */
+    left: 0; /* 왼쪽에 정렬 */
+    background-color: transparent;
+  }
+
+  .header .hamburger {
+    display: none; /* 큰 화면에서는 햄버거 메뉴 숨기기 */
+  }
+}
