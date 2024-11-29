@@ -12,7 +12,7 @@ export const theme = {
   footerBgColor: "#000000", // 푸터 배경색 (검정색)
   borderColor: "#333", // 경계선 색상 (어두운 그레이)
   borderRadius: "8px", // 경계선 둥글게 처리
-  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)", // 그림자 효과
+  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)",
   cardBgColor: "#333", // 카드 배경색 (어두운 회색)
   cardHoverColor: "#444", // 카드 호버 시 배경색 (어두운 회색)
   searchBgColor: "#333", // 검색 바 배경색 (어두운 회색)
