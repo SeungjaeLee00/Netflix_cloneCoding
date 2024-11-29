@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { searchMovies } from "../utils/api";
 import MovieCard from "../components/MovieCard";
 import Pagination from "../components/Pagination";
@@ -18,7 +18,7 @@ const SearchPage = () => {
   });
 
   // 검색어 변경 시 호출
-  const handleSearch = async () => {
+  const handleSearch = useCallback(async () => {
     try {
       const data = await searchMovies(query, page); // api.js에서 제공하는 searchMovies 함수 호출
       setMovies(data.results); // 검색된 영화 목록 설정
@@ -26,10 +26,10 @@ const SearchPage = () => {
     } catch (error) {
       console.error("Error fetching search results:", error);
     }
-  };
+  }, [query, page]);
 
   // 필터링 처리
-  const applyFilters = () => {
+  const applyFilters = useCallback(() => {
     let updatedMovies = [...movies];
 
     // 장르 필터링
@@ -59,7 +59,7 @@ const SearchPage = () => {
     }
 
     setFilteredMovies(updatedMovies); // 필터링된 영화 목록 설정
-  };
+  }, [movies, filters]);
 
   // 검색어 및 페이지 변경 시 데이터를 새로 불러옴
   useEffect(() => {
