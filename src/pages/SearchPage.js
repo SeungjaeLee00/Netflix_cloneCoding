@@ -66,12 +66,12 @@ const SearchPage = () => {
     if (query) {
       handleSearch(); // 검색어가 있을 때만 검색 수행
     }
-  }, [page, query]);
+  }, [page, query, handleSearch]);
 
   // 필터링 적용 시마다 필터링된 목록 갱신
   useEffect(() => {
     applyFilters();
-  }, [movies, filters]);
+  }, [movies, filters, applyFilters]);
 
   return (
     <div className="search-page">
