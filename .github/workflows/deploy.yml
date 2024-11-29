@@ -29,7 +29,7 @@ jobs:
         run: npm run build
 
       # 5. Git 설정 (이메일과 사용자 이름 설정)
-      - name: Set up Git user
+      - name: Set Git user
         run: |
           git config --global user.email "leesengjie@naver.com"
           git config --global user.name "SeungjaeLee00"
