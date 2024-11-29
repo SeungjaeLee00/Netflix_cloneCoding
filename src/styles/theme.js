@@ -10,7 +10,7 @@ export const theme = {
   linkHoverColor: "#9B171E", // 링크 호버 색상 (어두운 레드)
   headerBgColor: "#141414", // 헤더 배경색 (어두운 회색)
   footerBgColor: "#000000", // 푸터 배경색 (검정색)
-  borderColor: "#333", // 경계선 색상 (어두운 그레이)
+  borderColor: "#333",
   borderRadius: "8px", // 경계선 둥글게 처리
   boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)",
   cardBgColor: "#333", // 카드 배경색 (어두운 회색)
