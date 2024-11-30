@@ -45,7 +45,6 @@ const App = () => {
   };
 
   if (isLoggedIn === null) {
-    // 로그인 상태를 비동기적으로 확인하는 동안 로딩 화면을 보여줄 수 있습니다
     return <div>Loading...</div>; // 로그인 상태를 확인 중인 동안 표시할 UI
   }
 
@@ -54,7 +53,6 @@ const App = () => {
       <Header onLogout={handleLogout} isLoggedIn={isLoggedIn} />
       {isPopupVisible && <SignInPopup onClose={handleClosePopup} />}
       <Routes>
-        {/* 로그인 상태 체크: 로그인 되어있지 않으면 signUp 페이지로 리다이렉트 */}
         <Route
           path="/"
           element={isLoggedIn ? <HomePage /> : <Navigate to="/signUp" />}
