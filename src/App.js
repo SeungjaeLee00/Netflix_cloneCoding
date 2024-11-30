@@ -20,9 +20,9 @@ const App = () => {
   // 로그인 상태 확인
   useEffect(() => {
     const loggedIn = localStorage.getItem("isLoggedIn");
-    if (loggedIn) {
+    if (loggedIn === "true") {
       setIsLoggedIn(true);
-      setIsPopupVisible(false); // 로그인 상태라면 팝업 숨김
+      setIsPopupVisible(false);
     } else {
       setIsLoggedIn(false);
     }
@@ -49,7 +49,11 @@ const App = () => {
   }
 
   return (
-    <Router basename="/Netflix_cloneCoding">
+    <Router
+      basename={
+        process.env.NODE_ENV === "production" ? "/Netflix_cloneCoding" : "/"
+      }
+    >
       <Header onLogout={handleLogout} isLoggedIn={isLoggedIn} />
       {isPopupVisible && <SignInPopup onClose={handleClosePopup} />}
       <Routes>
