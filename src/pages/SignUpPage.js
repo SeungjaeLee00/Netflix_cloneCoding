@@ -25,7 +25,7 @@ const SignUpPage = ({ onShowPopup }) => {
       return;
     }
 
-    const users = getFromLocalStorage("users");
+    const users = getFromLocalStorage("users") || []; // null인 경우 빈 배열로 처리
     const isEmailUsed = users.some((user) => user.email === email);
 
     if (isEmailUsed) {
