@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/SeungjaeLee00/Netflix_cloneCoding.git/static/css/main.071ffce8.css",
-    "main.js": "/SeungjaeLee00/Netflix_cloneCoding.git/static/js/main.9b158770.js",
+    "main.js": "/SeungjaeLee00/Netflix_cloneCoding.git/static/js/main.c9408425.js",
     "index.html": "/SeungjaeLee00/Netflix_cloneCoding.git/index.html",
     "main.071ffce8.css.map": "/SeungjaeLee00/Netflix_cloneCoding.git/static/css/main.071ffce8.css.map",
-    "main.9b158770.js.map": "/SeungjaeLee00/Netflix_cloneCoding.git/static/js/main.9b158770.js.map"
+    "main.c9408425.js.map": "/SeungjaeLee00/Netflix_cloneCoding.git/static/js/main.c9408425.js.map"
   },
   "entrypoints": [
     "static/css/main.071ffce8.css",
-    "static/js/main.9b158770.js"
+    "static/js/main.c9408425.js"
   ]
 }
