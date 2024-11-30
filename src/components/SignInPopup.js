@@ -50,7 +50,7 @@ const SignInPopup = ({ onClose }) => {
 
     alert("로그인 성공!");
     onClose();
-    window.location.href = "/"; // 메인 페이지로 이동
+    window.location.href = "/Netflix_cloneCoding/#/"; // 메인 페이지로 이동
   };
 
   const handleSignUp = () => {
