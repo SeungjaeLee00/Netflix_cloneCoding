@@ -50,7 +50,7 @@ const App = () => {
   }
 
   return (
-    <Router>
+    <Router basename="/Netflix_cloneCoding">
       <Header onLogout={handleLogout} isLoggedIn={isLoggedIn} />
       {isPopupVisible && <SignInPopup onClose={handleClosePopup} />}
       <Routes>
