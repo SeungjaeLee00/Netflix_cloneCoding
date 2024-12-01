@@ -2,7 +2,8 @@ import axios from "axios";
 
 // TMDB API 기본 설정
 const BASE_URL = "https://api.themoviedb.org/3";
-const API_KEY = process.env.REACT_APP_TMDB_API_KEY; // 환경 변수에서 API 키 읽기
+const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+const BEARER_TOKEN = process.env.REACT_APP_TMDB_BEARER_TOKEN;
 
 // Axios 인스턴스 생성
 const api = axios.create({
@@ -10,6 +11,10 @@ const api = axios.create({
   params: {
     api_key: API_KEY,
     language: "en-US", // 기본 언어 설정
+  },
+  headers: {
+    accept: "application/json",
+    Authorization: `Bearer ${BEARER_TOKEN}`,
   },
 });
 

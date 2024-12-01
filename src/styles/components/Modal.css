@@ -1,0 +1,92 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 8px;
+  overflow-y: auto;
+  max-height: 80vh; /* 화면의 80% 높이만큼 모달 높이 제한 */
+  color: #fff;
+  text-align: left;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  font-size: 24px;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+}
+
+.modal-content img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.modal-content p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.modal-content .modal-buttons {
+  display: flex;
+  justify-content: space-between; /* 버튼들을 양쪽 끝으로 정렬 */
+  margin-top: 20px; /* 버튼들 간에 여백을 주기 위해 */
+}
+
+.favorite-btn {
+  padding: 10px 15px;
+  background-color: transparent;
+  color: #ff5a5f;
+  border: 2px solid #ff5a5f;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.favorite-btn:hover {
+  background-color: #ff5a5f;
+  color: white;
+  border-color: #ff5a5f;
+}
+
+.favorite-btn.favorited {
+  background-color: #ff5a5f;
+  color: white;
+}
+
+.close-btn {
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #ccc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background-color: #aaa;
+}

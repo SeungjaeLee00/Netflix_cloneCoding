@@ -1,43 +1,91 @@
-import { useState, useEffect } from "react";
-import { getPopularMovies } from "../utils/api"; // api.js에서 getPopularMovies 함수 임포트
+import React, { useState, useEffect } from "react";
+import {
+  getFromLocalStorage,
+  saveFavoriteMovies,
+  saveToLocalStorage,
+} from "../utils/storage";
+import { getPopularMovies } from "../utils/api";
 import MovieCard from "../components/MovieCard";
 import LoadingSpinner from "../components/LoadingSpinner";
+import Modal from "../components/Modal"; // Modal 컴포넌트 가져오기
 import "../styles/pages/HomePage.css";
 
-function HomePage() {
-  const [movies, setMovies] = useState([]); // 인기 영화 목록
-  const [loading, setLoading] = useState(true); // 로딩 상태
+const HomePage = () => {
+  const [movies, setMovies] = useState([]);
+  const [wishlist, setWishlist] = useState(
+    getFromLocalStorage("favoriteMovies") || []
+  );
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        setLoading(true); // 데이터를 가져오기 전에 로딩 상태 설정
-        const data = await getPopularMovies(1); // 첫 번째 페이지 데이터 가져오기
-        setMovies(data.results); // 인기 영화 목록 설정
-        setLoading(false); // 데이터 로딩 후 로딩 상태 해제
+        const data = await getPopularMovies();
+        setMovies(data.results);
       } catch (error) {
-        console.error("Error fetching popular movies:", error);
-        setLoading(false); // 에러 발생 시 로딩 상태 해제
+        console.error("Error fetching movies:", error);
+      } finally {
+        setLoading(false);
       }
     };
+    fetchMovies();
+  }, []);
 
-    fetchMovies(); // 영화 목록 데이터 가져오기
-  }, []); // 컴포넌트 마운트 시 한번만 호출
+  const handleMovieClick = (movie) => {
+    setSelectedMovie(movie); // 영화 클릭 시 상세 정보를 모달로 보여주기
+  };
+
+  const handleAddToWishlist = (movie) => {
+    saveFavoriteMovies(movie);
+    setWishlist(getFromLocalStorage("favoriteMovies"));
+  };
+
+  const handleRemoveFromWishlist = (movie) => {
+    const updatedWishlist = wishlist.filter((item) => item.id !== movie.id);
+    setWishlist(updatedWishlist);
+    saveToLocalStorage("favoriteMovies", updatedWishlist);
+  };
+
+  const isMovieFavorited = (movie) => {
+    return wishlist.some((fav) => fav.id === movie.id); // 찜 목록에 해당 영화가 있으면 true
+  };
+
+  const handleCloseModal = () => {
+    setSelectedMovie(null); // 모달 닫기
+  };
 
   return (
     <div className="home-page">
       <h1>Popular Movies</h1>
       {loading ? (
-        <LoadingSpinner /> // 로딩 중일 때 로딩 스피너 표시
+        <LoadingSpinner />
       ) : (
         <div className="movie-list">
           {movies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} onClick={() => {}} />
+            <MovieCard
+              key={movie.id}
+              movie={movie}
+              onClick={handleMovieClick}
+              isFavorite={isMovieFavorited(movie)}
+              handleAddToWishlist={handleAddToWishlist}
+              handleRemoveFromWishlist={handleRemoveFromWishlist}
+            />
           ))}
         </div>
       )}
+
+      {selectedMovie && (
+        <Modal
+          movie={selectedMovie}
+          onClose={handleCloseModal}
+          handleAddToWishlist={handleAddToWishlist}
+          handleRemoveFromWishlist={handleRemoveFromWishlist}
+          isFavorite={isMovieFavorited(selectedMovie)}
+        />
+      )}
     </div>
   );
-}
+};
 
 export default HomePage;
