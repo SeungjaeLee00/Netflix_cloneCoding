@@ -23,8 +23,6 @@
 1. 이 저장소를 클론합니다.
 
    ```bash
-   bash
-   코드 복사
    git clone https://github.com/SeungjaeLee00/Netflix_cloneCoding.git
 
    ```
@@ -32,8 +30,6 @@
 2. 프로젝트 디렉토리로 이동합니다.
 
    ```bash
-   bash
-   코드 복사
    cd Netflix_cloneCoding
 
    ```
@@ -41,8 +37,6 @@
 3. 필요한 의존성 패키지를 설치합니다.
 
    ```bash
-   bash
-   코드 복사
    npm install
 
    ```
@@ -50,8 +44,6 @@
 4. 개발 서버를 시작합니다.
 
    ```bash
-   bash
-   코드 복사
    npm start
 
    ```
