@@ -28,17 +28,22 @@ jobs:
       - name: Build the app
         run: npm run build
 
-      # 5. Git 설정 (이메일과 사용자 이름 설정)
-      - name: Set Git user
-        run: |
-          git config --global user.email "leesengjie@naver.com"
-          git config --global user.name "SeungjaeLee00"
-          git config --global url."https://${GH_TOKEN}@github.com/".insteadOf "https://github.com/"
-
-      # 6. GitHub Pages에 배포
       - name: Deploy to GitHub Pages
-        run: |
-          git remote set-url origin https://$GH_TOKEN@github.com/SeungjaeLee00/Netflix_cloneCoding.git
-          npm run deploy
+        run: npm run deploy
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      # # 5. Git 설정 (이메일과 사용자 이름 설정)
+      # - name: Set Git user
+      #   run: |
+      #     git config --global user.email "leesengjie@naver.com"
+      #     git config --global user.name "SeungjaeLee00"
+      #     git config --global url."https://${GH_TOKEN}@github.com/".insteadOf "https://github.com/"
+
+      # # 6. GitHub Pages에 배포
+      # - name: Deploy to GitHub Pages
+      #   run: |
+      #     git remote set-url origin https://$GH_TOKEN@github.com/SeungjaeLee00/Netflix_cloneCoding.git
+      #     npm run deploy
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
