@@ -7,7 +7,7 @@ import {
 } from "../utils/storage";
 import "../styles/components/SignInPopup.css";
 
-const SignInPopup = ({ onClose }) => {
+const SignInPopup = ({ onClose, onLogin }) => {
   const [isSignUp, setIsSignUp] = useState(false); // true면 회원가입 모드
   const [form, setForm] = useState({
     email: "",
@@ -49,8 +49,8 @@ const SignInPopup = ({ onClose }) => {
     }
 
     alert("로그인 성공!");
+    onLogin();
     onClose();
-    navigate("/");
   };
 
   const handleSignUp = () => {
@@ -78,13 +78,13 @@ const SignInPopup = ({ onClose }) => {
     saveToLocalStorage("users", [...users, newUser]);
 
     alert("회원가입 성공! 로그인 해주세요.");
-    setIsSignUp(false); // 로그인 화면으로 전환
+    setIsSignUp(false);
     setForm({ email: "", password: "", confirmPassword: "" });
   };
 
   const handleSignUpRedirect = () => {
     navigate("/signUp");
-    onClose(); // 팝업 닫기
+    onClose();
   };
 
   return (

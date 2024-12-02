@@ -15,17 +15,17 @@ import SignInPopup from "./components/SignInPopup";
 
 const App = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(null); // null로 초기화하여 로딩 상태를 처리
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
+
+  const basename =
+    process.env.NODE_ENV === "production" ? "/Netflix_cloneCoding" : "/";
 
   // 로그인 상태 확인
   useEffect(() => {
-    const loggedIn = localStorage.getItem("isLoggedIn");
-    if (loggedIn === "true") {
-      setIsLoggedIn(true);
-      setIsPopupVisible(false);
-    } else {
-      setIsLoggedIn(false);
-    }
+    // const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const loggedIn = sessionStorage.getItem("isLoggedIn") === "true";
+    setIsLoggedIn(loggedIn);
+    setIsPopupVisible(!loggedIn); // 로그아웃 상태면 팝업 표시
   }, []);
 
   // 팝업 닫기 처리
@@ -37,28 +37,40 @@ const App = () => {
     setIsPopupVisible(true);
   };
 
+  const handleLogin = () => {
+    // localStorage.setItem("isLoggedIn", true);
+    sessionStorage.setItem("isLoggedIn", true);
+    setIsLoggedIn(true);
+    setIsPopupVisible(false); // 팝업 닫기
+  };
+
   // 로그아웃 처리
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
+    sessionStorage.removeItem("isLoggedIn");
+    // localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
     setIsPopupVisible(true); // 로그아웃 후 팝업 다시 표시
   };
 
   if (isLoggedIn === null) {
-    return <div>Loading...</div>; // 로그인 상태를 확인 중인 동안 표시할 UI
+    return <div>Loading...</div>; // 로그인 상태 확인 중 로딩 UI
   }
 
   return (
-    <Router
-      basename={
-        process.env.NODE_ENV === "production" ? "/Netflix_cloneCoding" : "/"
-      }
-    >
+    <Router basename={basename}>
       <Header onLogout={handleLogout} isLoggedIn={isLoggedIn} />
-      {isPopupVisible && <SignInPopup onClose={handleClosePopup} />}
+      {isPopupVisible && (
+        <SignInPopup onClose={handleClosePopup} onLogin={handleLogin} />
+      )}
       <Routes>
         <Route
           path="/"
+          element={
+            isLoggedIn ? <Navigate to="/main" /> : <Navigate to="/signUp" />
+          }
+        />
+        <Route
+          path="/main"
           element={isLoggedIn ? <HomePage /> : <Navigate to="/signUp" />}
         />
         <Route
@@ -77,7 +89,7 @@ const App = () => {
           path="/signUp"
           element={
             isLoggedIn ? (
-              <Navigate to="/" />
+              <Navigate to="/main" />
             ) : (
               <SignUpPage onShowPopup={handleShowPopup} />
             )

@@ -3,6 +3,8 @@ import { searchMovies } from "../utils/api";
 import MovieCard from "../components/MovieCard";
 import Pagination from "../components/Pagination";
 import ScrollToTop from "../components/ScrollToTop";
+import Modal from "../components/Modal";
+import { getFromLocalStorage, saveToLocalStorage } from "../utils/storage"; // Local Storage 유틸리티
 import "../styles/pages/SearchPage.css";
 
 const SearchPage = () => {
@@ -16,6 +18,42 @@ const SearchPage = () => {
     rating: 0,
     sortBy: "popularity.desc",
   });
+
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [wishlist, setWishlist] = useState([]);
+
+  // Local Storage에서 찜 목록 가져오기
+  useEffect(() => {
+    const storedWishlist = getFromLocalStorage("favoriteMovies") || [];
+    setWishlist(storedWishlist);
+  }, []);
+
+  // 찜 목록에 영화 추가
+  const handleAddToWishlist = (movie) => {
+    const updatedWishlist = [...wishlist, movie];
+    setWishlist(updatedWishlist);
+    saveToLocalStorage("favoriteMovies", updatedWishlist);
+  };
+
+  // 찜 목록에서 영화 제거
+  const handleRemoveFromWishlist = (movie) => {
+    const updatedWishlist = wishlist.filter((item) => item.id !== movie.id);
+    setWishlist(updatedWishlist);
+    saveToLocalStorage("favoriteMovies", updatedWishlist);
+  };
+
+  // 모달 열기
+  const openModal = (movie) => {
+    setSelectedMovie(movie);
+    setIsModalOpen(true);
+  };
+
+  // 모달 닫기
+  const closeModal = () => {
+    setSelectedMovie(null);
+    setIsModalOpen(false);
+  };
 
   // 검색어 변경 시 호출
   const handleSearch = useCallback(async () => {
@@ -93,7 +131,6 @@ const SearchPage = () => {
           <option value="28">액션</option>
           <option value="35">코미디</option>
           <option value="18">드라마</option>
-          {/* 추가 장르 */}
         </select>
         <select
           onChange={(e) => setFilters({ ...filters, sortBy: e.target.value })}
@@ -111,11 +148,24 @@ const SearchPage = () => {
       </div>
       <div className="movie-list">
         {filteredMovies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+            onClick={() => openModal(movie)}
+          />
         ))}
       </div>
       <Pagination page={page} totalPages={totalPages} setPage={setPage} />
       <ScrollToTop />
+      {isModalOpen && selectedMovie && (
+        <Modal
+          movie={selectedMovie}
+          onClose={closeModal}
+          handleAddToWishlist={handleAddToWishlist}
+          handleRemoveFromWishlist={handleRemoveFromWishlist}
+          isFavorite={wishlist.some((item) => item.id === selectedMovie.id)} // 찜 여부 확인
+        />
+      )}
     </div>
   );
 };
