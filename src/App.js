@@ -17,8 +17,7 @@ const App = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
-  const basename =
-    process.env.NODE_ENV === "production" ? "/Netflix_cloneCoding" : "/";
+  const basename = process.env.REACT_APP_BASENAME || "/";
 
   // 로그인 상태 확인
   useEffect(() => {
