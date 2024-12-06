@@ -4,7 +4,7 @@ import {
   saveFavoriteMovies,
   saveToLocalStorage,
 } from "../utils/storage";
-import { getPopularMovies } from "../utils/api";
+import { getPopularMovies } from "../api/api";
 import MovieCard from "../components/MovieCard";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Modal from "../components/Modal"; // Modal 컴포넌트 가져오기

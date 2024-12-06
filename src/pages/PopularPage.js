@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getPopularMovies } from "../utils/api";
+import { getPopularMovies } from "../api/api";
 import MovieCard from "../components/MovieCard";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Pagination from "../components/Pagination";

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { searchMovies } from "../utils/api";
+import { searchMovies } from "../api/api";
 import MovieCard from "../components/MovieCard";
 import Pagination from "../components/Pagination";
 import ScrollToTop from "../components/ScrollToTop";
