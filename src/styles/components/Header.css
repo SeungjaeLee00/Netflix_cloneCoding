@@ -45,7 +45,6 @@
   align-items: center;
 }
 
-/* 네비게이션 항목 스타일 */
 .header nav a {
   color: white;
   text-decoration: none;
@@ -125,15 +124,6 @@
 
 /* 큰 화면에서 네비게이션 메뉴 레이아웃 */
 @media (min-width: 769px) {
-  .header nav {
-    display: flex; /* 큰 화면에서는 기본적으로 메뉴 보이기 */
-    gap: 20px;
-    position: relative; /* 고정되지 않게 설정 */
-    top: 0; /* 메뉴가 타이틀과 겹치지 않게 하기 */
-    left: 0; /* 왼쪽에 정렬 */
-    background-color: transparent;
-  }
-
   .header .hamburger {
     display: none; /* 큰 화면에서는 햄버거 메뉴 숨기기 */
   }
